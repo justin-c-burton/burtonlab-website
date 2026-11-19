@@ -86,8 +86,8 @@ strong { font-weight: 700; }
 .sub-h { font-family: var(--head); font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 3rem 0 1.25rem; }
 .lead { font-size: clamp(1.2rem, 2vw, 1.4rem); line-height: 1.55; color: var(--ink); }
 .intro { margin-bottom: 2.5rem; }
-.intro .lead { max-width: 60ch; }
-.prose { max-width: 75ch; }
+.intro > p { max-width: var(--measure); }
+.prose { max-width: var(--measure); }
 .more { font-family: var(--head); font-weight: 600; font-size: .85rem; margin-top: 1rem; }
 .more a { text-decoration: none; }
 .btn { display: inline-block; font-family: var(--head); font-weight: 700; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; padding: .8rem 1.2rem; background: var(--night); color: #fff; text-decoration: none; border-radius: var(--radius); }
@@ -186,7 +186,7 @@ figcaption { font-size: .92rem; color: var(--muted); margin-top: .6rem; line-hei
 .gallery .cap { display: block; font-family: var(--head); font-size: .78rem; font-weight: 600; letter-spacing: .06em; margin-top: .45rem; }
 
 /* ---------- publications on topic pages ---------- */
-.pubbox { margin-top: 2rem; border-left: 3px solid var(--ember); padding: .25rem 0 .25rem 1.4rem; max-width: 75ch; }
+.pubbox { margin-top: 2rem; border-left: 3px solid var(--ember); padding: .25rem 0 .25rem 1.4rem; max-width: var(--measure); }
 .pubbox h4 { font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .publinks { margin: 0; padding: 0; list-style: none; }
 .publinks li { padding: .3rem 0; }
@@ -281,3 +281,12 @@ figcaption { font-size: .92rem; color: var(--muted); margin-top: .6rem; line-hei
 .pub-links a[data-kind="PDF"] { background: var(--magenta); border-color: var(--magenta); color: #fff; }
 .pub-links a:hover { border-color: var(--magenta); color: var(--magenta); }
 .pub-links a[data-kind="PDF"]:hover { background: #6f1245; color: #fff; }
+
+/* ---------- line length and line breaks ----------
+   One measure for all running text, whatever the heading above it:
+   paragraphs never run wider than --measure (about 70 characters of body text).
+   Headings balance their lines; paragraphs avoid one-word last lines. */
+:root { --measure: 53rem; }
+.prose.with-badge { max-width: calc(var(--measure) + 164px); }
+h1, h2, h3, h4, .sec-h, .tagline { text-wrap: balance; }
+p, li, figcaption, dd { text-wrap: pretty; }
